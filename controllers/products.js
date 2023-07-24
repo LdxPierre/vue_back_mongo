@@ -42,7 +42,7 @@ const deleteProduct = (req,res,next)=>{
   req.params.id ? null : res.status(400).json({message: 'ID is missing'})
 
   Product.findOneAndDelete({_id:req.params.id})
-  .then(result=>res.status(200).json({result}))
+  .then(result=>res.status(200).json({message: `${result.name} has been deleted`}))
   .catch(error=>res.status(404).json({message:error}))
 }
 
