@@ -29,8 +29,8 @@ const updateProduct = (req,res)=>{
   req.params.id ? null : res.status(400).json({message:'Id is missing'})
   req.body ? null : res.status(400).json({message:'Body is missing or invalid'})
   
-  Product.findOneAndUpdate({_id:req.params.id}, req.body)
-  .then(result=>res.status(200).json({result}))
+  Product.findOneAndUpdate({_id:req.params.id}, req.body, {new:true})
+  .then(result=>res.status(200).json(result))
   .catch(error=>res.status(404).json({message:error}))
 }
 
