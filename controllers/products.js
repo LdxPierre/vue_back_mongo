@@ -3,7 +3,7 @@ const Product = require('../models/Product.js')
 const getProducts =( (req,res,next)=> {
   Product.find({})
   .then(result=>res.status(200).json(result))
-  .catch(error=>res.status(500).json({message:error}))
+  .catch(error=>res.status(500).json(error))
 });
 
 const getProduct = ((req,res,next) =>{
@@ -12,7 +12,7 @@ const getProduct = ((req,res,next) =>{
   }
   Product.findOne({_id:req.params.id})
   .then(result=>res.status(200).json([result]))
-  .catch(error=>res.status(404).json({message:'Product not found'}))
+  .catch(error=>res.status(404).json(error))
 })
 
 const createProduct = (req,res,next)=>{
@@ -22,7 +22,7 @@ const createProduct = (req,res,next)=>{
   }
   Product.create(req.body)
   .then(result=>res.status(201).json(result))
-  .catch(error=>res.status(500).json({message: error}))
+  .catch(error=>res.status(500).json(error))
 }
 
 const updateProduct = (req,res)=>{
@@ -31,7 +31,7 @@ const updateProduct = (req,res)=>{
   
   Product.findOneAndUpdate({_id:req.params.id}, req.body, {new:true})
   .then(result=>res.status(200).json(result))
-  .catch(error=>res.status(404).json({message:error}))
+  .catch(error=>res.status(404).json(error))
 }
 
 const replaceProduct = (req,res)=>{
@@ -40,7 +40,7 @@ const replaceProduct = (req,res)=>{
 
   Product.findOneAndReplace({_id:req.params.id}, req.body, {new:true})
   .then(result => res.status(200).json(result))
-  .catch(error=>res.status(500).json({message:error}))
+  .catch(error=>res.status(500).json(error))
 }
 
 const deleteProduct = (req,res,next)=>{
@@ -48,7 +48,7 @@ const deleteProduct = (req,res,next)=>{
 
   Product.findOneAndDelete({_id:req.params.id})
   .then(result=>res.status(200).json({message: `${result.name} has been deleted`}))
-  .catch(error=>res.status(404).json({message:error}))
+  .catch(error=>res.status(404).json(error))
 }
 
 module.exports ={
