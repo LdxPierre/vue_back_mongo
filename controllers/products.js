@@ -7,12 +7,9 @@ const getProducts =( (req,res,next)=> {
 });
 
 const getProduct = ((req,res,next) =>{
-  if (!req.params.id){
-    res.status(400).json({message:'Id missing from request'})
-  }
-  Product.findOne({_id:req.params.id})
-  .then(result=>res.status(200).json([result]))
-  .catch(error=>res.status(404).json(error))
+  Product.findOne({'name': {'$regex': `^${req.params.name}$`, $options: 'i'}})
+  .then(result=>result ? res.status(200).json(result) : res.status(404).json(null) )
+  .catch(error=>res.status(500).json(error))
 })
 
 const createProduct = (req,res,next)=>{
