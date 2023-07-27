@@ -13,3 +13,4 @@ app.use((req,res,next)=>{res.header('Access-Control-Allow-Origin', 'http://local
 app.use((req,res,next)=>{res.header('Access-Control-Allow-Headers', 'Content-Type');next()})
 app.use((req,res,next)=>{res.header('Access-Control-Allow-Methods', '*');next()})
 app.use('/api/products', products_routes)
+app.get('*', (req,res)=>{res.status(404).json('404 not found')})
